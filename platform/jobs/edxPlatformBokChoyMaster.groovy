@@ -77,19 +77,8 @@ secretMap.each { jobConfigs ->
     assert jobConfig.containsKey('context')
     assert jobConfig.containsKey('defaultBranch')
     assert jobConfig.containsKey('defaultTestengBranch')
-    assert jobConfig.containsKey('disabled')
 
     buildFlowJob(jobConfig['jobName']) {
-
-        // automatically disable certain jobs for branches that don't always exist
-        // to avoid incessant polling
-        if (jobConfig['disabled'].toBoolean()) {
-            disabled()
-            description('This job is disabled by default, as the target platform' +
-                        'branch is not guaranteed to always exist. If you need to' +
-                        'run this job, make sure you manually enable it, and ' +
-                        'disable it when you are finished')
-        }
 
         /* For non-open jobs, enable project based security */
         if (!jobConfig['open'].toBoolean()) {
@@ -100,10 +89,7 @@ secretMap.each { jobConfigs ->
             }
         }
 
-        parameters {
-            stringParam('ENV_VARS', '', '')
-            stringParam('WORKER_LABEL', jobConfig['workerLabel'], 'Jenkins worker for running the test subset jobs')
-        }
+        label(jobConfig['workerLabel'])
 
         properties {
               githubProjectUrl(JENKINS_PUBLIC_GITHUB_BASEURL + jobConfig['platformUrl'])
