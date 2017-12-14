@@ -153,8 +153,8 @@ secretMap.each { jobConfigs ->
         predefinedPropsMap.put('GITHUB_REPO', jobConfig['repoName'])
 
         publishers { //JUnit Test report, trigger GitHub-Build-Status, email, message hipchat
-            mailer(jobConfig['email']
+            mailer(jobConfig['email'])
             hipChat JENKINS_PUBLIC_HIPCHAT.call(jobConfig['hipchat'])
-       }
+        }
     }
 }
