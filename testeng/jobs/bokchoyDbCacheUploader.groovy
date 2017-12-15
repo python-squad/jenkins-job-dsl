@@ -66,7 +66,7 @@ secretMap.each { jobConfigs ->
     assert jobConfig.containsKey('email')
     assert jobConfig.containsKey('hipchat')
 
-    job('bokchoy_db_cache_uploader') {
+    job('bokchoy-db-cache-uploader') {
 
         description('Check to see if a merge introduces new migrations, and create a PR into edx-platform if it does.')
 
