@@ -86,9 +86,6 @@ secretMap.each { jobConfigs ->
                 remote {
                     url(JENKINS_PUBLIC_GITHUB_BASEURL + jobConfig['platformUrl'] + '.git')
                     refspec(jobConfig['refSpec'])
-                    if (!jobConfig['open'].toBoolean()) {
-                        credentials(jobConfig['platformCredential'])
-                    }
                 }
                 branch(jobConfig['defaultBranch'])
                 browser()
@@ -104,9 +101,6 @@ secretMap.each { jobConfigs ->
             git { //using git on the branch and url, clean before checkout
                 remote {
                     url(JENKINS_PUBLIC_GITHUB_BASEURL + jobConfig['testengUrl'] + '.git')
-                    if (!jobConfig['open'].toBoolean()) {
-                        credentials(jobConfig['testengCredential'])
-                    }
                 }
                 branch(jobConfig['defaultTestengBranch'])
                 browser()
