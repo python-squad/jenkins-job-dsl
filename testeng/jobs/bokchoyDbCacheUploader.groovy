@@ -50,6 +50,7 @@ bokchoyDbCacheUploaderSecret:
 secretMap.each { jobConfigs ->
     Map jobConfig = jobConfigs.getValue()
 
+    assert jobConfig.containsKey('toolsTeam')
     assert jobConfig.containsKey('repoName')
     assert jobConfig.containsKey('testengUrl')
     assert jobConfig.containsKey('platformUrl')
@@ -73,7 +74,7 @@ secretMap.each { jobConfigs ->
         authorization {
             authorization {
                 blocksInheritance(true)
-                permissionAll('edx')
+                permissionAll(jobConfig['toolsTeam'])
             }
         }
 
