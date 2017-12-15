@@ -72,9 +72,9 @@ secretMap.each { jobConfigs ->
 
         // Enable project security to avoid exposing aws keys
         authorization {
-            authorization {
-                blocksInheritance(true)
-                permissionAll(jobConfig['toolsTeam'])
+            blocksInheritance(true)
+            jobConfig['toolsTeam'].each { member ->
+                permissionAll(member)
             }
         }
 
